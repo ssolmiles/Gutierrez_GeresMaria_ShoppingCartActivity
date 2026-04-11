@@ -1,0 +1,15 @@
+C:\Users\Geres Maria\source\repos\Gutierrez_GeresMaria_ShoppingCartActivity\bin\Debug\net10.0\Gutierrez_GeresMaria_ShoppingCartActivity.exe
+C:\Users\Geres Maria\source\repos\Gutierrez_GeresMaria_ShoppingCartActivity\bin\Debug\net10.0\Gutierrez_GeresMaria_ShoppingCartActivity.deps.json
+C:\Users\Geres Maria\source\repos\Gutierrez_GeresMaria_ShoppingCartActivity\bin\Debug\net10.0\Gutierrez_GeresMaria_ShoppingCartActivity.runtimeconfig.json
+C:\Users\Geres Maria\source\repos\Gutierrez_GeresMaria_ShoppingCartActivity\bin\Debug\net10.0\Gutierrez_GeresMaria_ShoppingCartActivity.dll
+C:\Users\Geres Maria\source\repos\Gutierrez_GeresMaria_ShoppingCartActivity\bin\Debug\net10.0\Gutierrez_GeresMaria_ShoppingCartActivity.pdb
+C:\Users\Geres Maria\source\repos\Gutierrez_GeresMaria_ShoppingCartActivity\obj\Debug\net10.0\Gutierrez_GeresMaria_ShoppingCartActivity.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Geres Maria\source\repos\Gutierrez_GeresMaria_ShoppingCartActivity\obj\Debug\net10.0\Gutierrez_GeresMaria_ShoppingCartActivity.AssemblyInfoInputs.cache
+C:\Users\Geres Maria\source\repos\Gutierrez_GeresMaria_ShoppingCartActivity\obj\Debug\net10.0\Gutierrez_GeresMaria_ShoppingCartActivity.AssemblyInfo.cs
+C:\Users\Geres Maria\source\repos\Gutierrez_GeresMaria_ShoppingCartActivity\obj\Debug\net10.0\Gutierrez_GeresMaria_ShoppingCartActivity.csproj.CoreCompileInputs.cache
+C:\Users\Geres Maria\source\repos\Gutierrez_GeresMaria_ShoppingCartActivity\obj\Debug\net10.0\Gutierrez_GeresMaria_ShoppingCartActivity.sourcelink.json
+C:\Users\Geres Maria\source\repos\Gutierrez_GeresMaria_ShoppingCartActivity\obj\Debug\net10.0\Gutierrez_GeresMaria_ShoppingCartActivity.dll
+C:\Users\Geres Maria\source\repos\Gutierrez_GeresMaria_ShoppingCartActivity\obj\Debug\net10.0\refint\Gutierrez_GeresMaria_ShoppingCartActivity.dll
+C:\Users\Geres Maria\source\repos\Gutierrez_GeresMaria_ShoppingCartActivity\obj\Debug\net10.0\Gutierrez_GeresMaria_ShoppingCartActivity.pdb
+C:\Users\Geres Maria\source\repos\Gutierrez_GeresMaria_ShoppingCartActivity\obj\Debug\net10.0\Gutierrez_GeresMaria_ShoppingCartActivity.genruntimeconfig.cache
+C:\Users\Geres Maria\source\repos\Gutierrez_GeresMaria_ShoppingCartActivity\obj\Debug\net10.0\ref\Gutierrez_GeresMaria_ShoppingCartActivity.dll
