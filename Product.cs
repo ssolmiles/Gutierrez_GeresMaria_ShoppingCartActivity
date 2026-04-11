@@ -152,3 +152,41 @@ class Program
                 Console.WriteLine("Invalid input! Please enter Y or N only.");
             }
         }
+
+        // Step 9: Display receipt
+        Console.WriteLine("\n--- Receipt ---");
+
+        double GrandTotal = 0;
+
+        for (int i = 0; i < CartCount; i++)
+        {
+            Console.WriteLine($"{Cart[i].Product.Name} x {Cart[i].Quantity} = {Cart[i].SubTotal}");
+            GrandTotal += Cart[i].SubTotal;
+        }
+
+        Console.WriteLine($"Grand Total: {GrandTotal}");
+
+        // Step 10: Discount if total >= 5000
+        double Discount = 0;
+
+        if (GrandTotal >= 5000)
+        {
+            Discount = GrandTotal * 0.1;
+            Console.WriteLine($"Discount (10%): {Discount}");
+        }
+
+        double FinalTotal = GrandTotal - Discount;
+        Console.WriteLine($"Final Total: {FinalTotal}");
+
+        // Step 12: Show remaining stock
+        Console.WriteLine("\n--- Updated Stock ---");
+
+        for (int i = 0; i < Store.Length; i++)
+        {
+            Console.WriteLine($"{Store[i].Name} - Remaining Stock: {Store[i].RemainingStock}");
+        }
+
+        Console.WriteLine("\nThank you for shopping!");
+    }
+}
+
