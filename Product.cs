@@ -36,8 +36,7 @@ class CartItem
 class Program
 {
     static void Main()
-    {
-        // Step 1: Create products array
+    { 
         Product[] Store = new Product[5];
 
         Store[0] = new Product { Id = 1, Name = "Boots", Price = 3000, RemainingStock = 5 };
@@ -47,7 +46,7 @@ class Program
         Store[4] = new Product { Id = 5, Name = "Slides", Price = 1500, RemainingStock = 15 };
 
 
-        // Step 2: Create cart array
+        
         CartItem[] Cart = new CartItem[10];
         int CartCount = 0;
 
@@ -62,7 +61,7 @@ class Program
                 Store[i].DisplayProduct();
             }
 
-            // Step 3: Get product number
+            
             Console.Write("Enter product number: ");
             string InputProduct = Console.ReadLine();
             int ProductNumber;
@@ -81,7 +80,7 @@ class Program
                 continue;
             }
 
-            // Step 3: Get quantity
+            
             Console.Write("Enter quantity: ");
             string InputQuantity = Console.ReadLine();
             int Quantity;
@@ -98,5 +97,58 @@ class Program
                 continue;
             }
 
-            // Step 6: Check for duplicate cart entries
-          
+            
+            bool FoundInCart = false;
+
+            for (int i = 0; i < CartCount; i++)
+            {
+                if (Cart[i].Product == SelectedProduct)
+                {
+                    Cart[i].Quantity += Quantity;
+                    Cart[i].SubTotal += SelectedProduct.GetItemTotal(Quantity);
+                    FoundInCart = true;
+                    Console.WriteLine($"Updated {SelectedProduct.Name} quantity in cart.");
+                    break;
+                }
+            }
+
+            // Step 5: Add to cart if not duplicate
+            if (!FoundInCart)
+            {
+                if (CartCount >= Cart.Length)
+                {
+                    Console.WriteLine("Cart is full.");
+                    continue;
+                }
+
+                Cart[CartCount] = new CartItem
+                {
+                    Product = SelectedProduct,
+                    Quantity = Quantity,
+                    SubTotal = SelectedProduct.GetItemTotal(Quantity)
+                };
+
+                CartCount++;
+                Console.WriteLine($"Added {Quantity} {SelectedProduct.Name}(s) to cart.");
+            }
+
+            // Deduct stock
+            SelectedProduct.RemainingStock -= Quantity;
+
+            // Ask if user wants to continue
+            string InputChoice;
+
+            while (true)
+            {
+                Console.Write("Add more items? (Y/N): ");
+                InputChoice = Console.ReadLine();
+
+                if (InputChoice.ToUpper() == "Y" || InputChoice.ToUpper() == "N")
+                {
+                    AddMore = InputChoice;
+                    break;
+                }
+
+                Console.WriteLine("Invalid input! Please enter Y or N only.");
+            }
+        }
