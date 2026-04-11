@@ -1,1 +1,1 @@
-﻿Console.WriteLine("Hello, World!");
+﻿//empty, placeholder for the main program file, which is required for a C# console application. The actual implementation of the program will go here, including the Main method, which serves as the entry point of the application. This file will contain the logic to execute the desired functionality of the program.
