@@ -5,7 +5,7 @@ class Product
     public int Id;
     public string Name;
     public double Price;
-    public int RemainingStock;///
+    public int RemainingStock;
 
     // Display product info
     public void DisplayProduct()
