@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Gutierrez_GeresMaria_ShoppingCartActivity")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5c6d1c0ac0fd6d9e9eae356c7dc1cf43ab2fdf76")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+23eefa424879868a7203ad4769b085c976a23e93")]
 [assembly: System.Reflection.AssemblyProductAttribute("Gutierrez_GeresMaria_ShoppingCartActivity")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Gutierrez_GeresMaria_ShoppingCartActivity")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
