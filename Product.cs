@@ -1,30 +1,25 @@
 ﻿using System;
-
 class Product
 {
     public int Id;
     public string Name;
     public double Price;
     public int RemainingStock;
-
     public void DisplayProduct()
     {
         Console.WriteLine($"{Id}. {Name} - Price: {Price} - Stock: {RemainingStock}");
     }
-
-    public double GetItemTotal(int Quantity)
+    public double GetItemTotal(int quantity)
     {
-        return Price * Quantity;
+        return Price * quantity;
     }
 }
-
 class CartItem
 {
     public Product Product;
     public int Quantity;
     public double SubTotal;
 }
-
 class Program
 {
     static void Main()
@@ -39,74 +34,86 @@ class Program
 
         CartItem[] Cart = new CartItem[10];
         int CartCount = 0;
+        int totalQuantity = 0;
 
-        int totalQuantity = 0; 
-
-        string AddMore = "Y";       
+        string AddMore = "Y";
 
         while (AddMore == "Y")
         {
-            Console.WriteLine("\n--- Store Menu ---");
-
+            Console.WriteLine("\n Store Menu ");
             for (int i = 0; i < Store.Length; i++)
             {
                 Store[i].DisplayProduct();
             }
-
-            Console.WriteLine("\n Dear Customers: The Total quantity max of yoour cart is only 10 items");
+            Console.WriteLine("\nCart limit: 10 items total");
 
             Console.Write("Enter product number: ");
             if (!int.TryParse(Console.ReadLine(), out int ProductNumber) ||
                 ProductNumber < 1 || ProductNumber > Store.Length)
             {
-                Console.WriteLine("Invalid product number!");
+                Console.WriteLine("Invalid product number.");
                 continue;
             }
-
             Product SelectedProduct = Store[ProductNumber - 1];
 
             if (SelectedProduct.RemainingStock <= 0)
             {
-                Console.WriteLine("Out of stock!");
+                Console.WriteLine("Product is out of stock.");
                 continue;
             }
 
             Console.Write("Enter quantity: ");
             if (!int.TryParse(Console.ReadLine(), out int Quantity) || Quantity < 1)
             {
-                Console.WriteLine("Invalid quantity!");
+                Console.WriteLine("Invalid quantity.");
                 continue;
             }
 
             if (Quantity > SelectedProduct.RemainingStock)
             {
-                Console.WriteLine("Not enough stock!");
+                Console.WriteLine("Not enough stock available.");
                 continue;
             }
-
-            //CHECK TOTAL CART QUANTITY BEFORE ADDING
-            if (totalQuantity + Quantity > 10)
+            int remainingCartSpace = 10 - totalQuantity;
+            if (Quantity > remainingCartSpace)
             {
-                Console.WriteLine("\nCart is full (10 items reached).");
-                break; //GO DIRECTLY TO RECEIPT
+                Console.WriteLine($"\nOnly {remainingCartSpace} items can still be added.");
+
+                string choice;
+                while (true)
+                {
+                    Console.Write("Add remaining items? (Y/N): ");
+                    choice = Console.ReadLine().ToUpper();
+
+                    if (choice == "Y" || choice == "N")
+                        break;
+
+                    Console.WriteLine("Invalid input. Please enter Y or N only.");
+                }
+                if (choice == "Y")
+                {
+                    Quantity = remainingCartSpace;
+                }
+                else
+                {
+                    Console.WriteLine("Item not added.");
+                    continue;
+                }
             }
 
             bool FoundInCart = false;
 
-            //UPDATE EXISTING ITEM
             for (int i = 0; i < CartCount; i++)
             {
                 if (Cart[i].Product.Id == SelectedProduct.Id)
                 {
                     Cart[i].Quantity += Quantity;
                     Cart[i].SubTotal += SelectedProduct.GetItemTotal(Quantity);
-
                     FoundInCart = true;
                     break;
                 }
             }
 
-            //ADD NEW ITEM
             if (!FoundInCart)
             {
                 Cart[CartCount] = new CartItem
@@ -115,24 +122,17 @@ class Program
                     Quantity = Quantity,
                     SubTotal = SelectedProduct.GetItemTotal(Quantity)
                 };
-
                 CartCount++;
             }
 
-            //TOTAL QUANTITY
             totalQuantity += Quantity;
-
-            // reduce stock
             SelectedProduct.RemainingStock -= Quantity;
-
-            // STOP ASKING WHEN FULL
+            
             if (totalQuantity >= 10)
             {
-                Console.WriteLine("\nCart reached max capacity (10 items).");
-                break; 
+                Console.WriteLine("\nCart reached maximum capacity (10 items).");
+                break;
             }
-
-            // ONLY ASK IF NOT FULL
             while (true)
             {
                 Console.Write("Add more items? (Y/N): ");
@@ -141,16 +141,13 @@ class Program
                 if (AddMore == "Y" || AddMore == "N")
                     break;
 
-                Console.WriteLine("Enter only Y or N.");
+                Console.WriteLine("Invalid input. type (Y/N) only.");
             }
 
             if (AddMore == "N")
                 break;
         }
-
-        // RECEIPT 
-        Console.WriteLine("\n--- Receipt ---");
-
+        Console.WriteLine("\n Receipt");
         double GrandTotal = 0;
 
         for (int i = 0; i < CartCount; i++)
@@ -162,23 +159,18 @@ class Program
         Console.WriteLine($"Grand Total: {GrandTotal}");
 
         double Discount = 0;
-
         if (GrandTotal >= 5000)
         {
-            Discount = GrandTotal * 0.1;
+            Discount = GrandTotal * 0.10;
             Console.WriteLine($"Discount (10%): {Discount}");
         }
 
         Console.WriteLine($"Final Total: {GrandTotal - Discount}");
-
-        //  STOCK 
         Console.WriteLine("\n--- Updated Stock ---");
-
         for (int i = 0; i < Store.Length; i++)
         {
             Console.WriteLine($"{Store[i].Name} - Stock: {Store[i].RemainingStock}");
         }
-
         Console.WriteLine("\nThank you for shopping!");
     }
 }
