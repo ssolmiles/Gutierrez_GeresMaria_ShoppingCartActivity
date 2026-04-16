@@ -1,5 +1,10 @@
 # Gutierrez_GeresMaria_ShoppingCartActivity
 
+
+
+
+<img width="1059" height="1060" alt="Image" src="https://github.com/user-attachments/assets/346f7a8a-50d7-4dbe-bf79-875a6dc37684" />
+
 This project is a simple shopping cart application that allows users to add items to their cart and view the total price. The Console-based shopping cart system built using C#.
 
 Naming Convetion Used: Pascal Case
