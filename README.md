@@ -34,5 +34,5 @@ Methods: 2
 	- Which is more efficient: Using files for classes or using a single file for all classes in C#?
 6. "What is the best type of flowchart to use for a shopping cart application?"
 
-
+// 
 In conclusion, most of the questions I asked were about introduction to what I don't know yet and how to fix errors I encountered while using GitHub.
