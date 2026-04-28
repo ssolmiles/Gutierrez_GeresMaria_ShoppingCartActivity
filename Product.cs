@@ -8,43 +8,45 @@ class Product
     public double Price;
     public int RemainingStock;
 
-    
     public void DisplayProduct()
     {
-        Console.WriteLine(
-            $"{Id}. {Name} - {Category} - PHP {Price} - Stock: {RemainingStock}"
-        );
+        Console.WriteLine($"{Id}. {Name} - {Category} - PHP {Price} - Stock: {RemainingStock}");
     }
 
- 
-    // Checks if requested quantity is valid and available
+    // 🔍 search by name
+    public bool MatchesName(string keyword)
+    {
+        return Name.ToLower().Contains(keyword.ToLower());
+    }
+
+    // 📂 category filter
+    public bool MatchesCategory(string category)
+    {
+        return Category == category;
+    }
+
+    // ✔ stock check
     public bool HasEnoughStock(int quantity)
     {
         return quantity > 0 && quantity <= RemainingStock;
     }
 
-    
-    // Deducts stock AFTER successful checkout
+    // 📦 stock deduction
     public void DeductStock(int quantity)
     {
-        if (!HasEnoughStock(quantity))
-        {
-            throw new InvalidOperationException("Stock deduction failed.");
-        }
-
-        RemainingStock -= quantity;
+        if (HasEnoughStock(quantity))
+            RemainingStock -= quantity;
     }
 
-    // price calculation
-    // Computes subtotal for a given quantity
+    // 💰 subtotal
     public double CalculateSubTotal(int quantity)
     {
         return Price * quantity;
     }
 
-    // low stock alert: checks if remaining stock is at or below reorder level
-    public bool IsLowStock(int reorderLevel)
+    // ⚠ low stock check
+    public bool IsLowStock(int level)
     {
-        return RemainingStock <= reorderLevel;
+        return RemainingStock <= level;
     }
 }
