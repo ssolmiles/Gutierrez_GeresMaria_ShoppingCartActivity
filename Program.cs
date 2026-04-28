@@ -210,5 +210,122 @@ class Program
 
                 Console.WriteLine("Added to cart.");
             }
+            //view cart
+            else if (choice == 5)
+            {
+                if (cartCount == 0)
+                {
+                    Console.WriteLine("Cart empty.");
+                    continue;
+                }
 
-           
+                for (int i = 0; i < cartCount; i++)
+                {
+                    Console.WriteLine(
+                        $"{i + 1}. {cart[i].Product.Name} x {cart[i].Quantity} = PHP {cart[i].GetSubTotal()}"
+                    );
+                }
+            }
+
+            // checkout
+            else if (choice == 6)
+            {
+                if (cartCount == 0)
+                {
+                    Console.WriteLine("Cart empty.");
+                    continue;
+                }
+
+                double total = 0;
+
+                for (int i = 0; i < cartCount; i++)
+                    total += cart[i].GetSubTotal();
+
+                double discount = total >= 5000 ? total * 0.10 : 0;
+                double finalTotal = total - discount;
+
+                double payment;
+
+                while (true)
+                {
+                    Console.WriteLine($"\nFinal Total: PHP {finalTotal}");
+                    Console.Write("Enter payment: ");
+
+                    if (!double.TryParse(Console.ReadLine(), out payment))
+                    {
+                        Console.WriteLine("Invalid input.");
+                        continue;
+                    }
+
+                    if (payment < finalTotal)
+                    {
+                        Console.WriteLine("Insufficient payment.");
+                        continue;
+                    }
+
+                    break;
+                }
+
+                double change = payment - finalTotal;
+
+                // stock deduction
+                for (int i = 0; i < cartCount; i++)
+                    cart[i].Product.DeductStock(cart[i].Quantity);
+
+                // receipt
+                Console.WriteLine("\n==========================");
+                Console.WriteLine($"Receipt No: {receiptNumber:0000}");
+                Console.WriteLine($"Date: {DateTime.Now}");
+                Console.WriteLine("--------------------------");
+
+                for (int i = 0; i < cartCount; i++)
+                    Console.WriteLine($"{cart[i].Product.Name} x {cart[i].Quantity} = PHP {cart[i].GetSubTotal()}");
+
+                Console.WriteLine("--------------------------");
+                Console.WriteLine($"Grand Total: PHP {total}");
+                Console.WriteLine($"Discount: PHP {discount}");
+                Console.WriteLine($"Final Total: PHP {finalTotal}");
+                Console.WriteLine($"Payment: PHP {payment}");
+                Console.WriteLine($"Change: PHP {change}");
+                Console.WriteLine("==========================");
+
+                orderHistory[orderCount++] = finalTotal;
+                receiptNumber++;
+
+                // LOW STOCK ALERT
+                Console.WriteLine("\nLOW STOCK ALERT:");
+
+                bool low = false;
+
+                foreach (Product p in store)
+                {
+                    if (p.IsLowStock(5))
+                    {
+                        Console.WriteLine($"{p.Name} has only {p.RemainingStock} left.");
+                        low = true;
+                    }
+                }
+
+                if (!low)
+                    Console.WriteLine("No low stock items.");
+
+                cartCount = 0;
+            }
+
+            // 7 HISTORY
+            else if (choice == 7)
+            {
+                for (int i = 0; i < orderCount; i++)
+                    Console.WriteLine($"Receipt #{i + 1:0000} - PHP {orderHistory[i]}");
+            }
+
+            // 8 EXIT
+            else if (choice == 8)
+            {
+                Console.WriteLine("Thank you!");
+                break;
+            }
+        }
+    }
+}
+
