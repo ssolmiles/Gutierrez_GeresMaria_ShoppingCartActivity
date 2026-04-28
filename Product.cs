@@ -19,7 +19,7 @@ class Product
         return Name.ToLower().Contains(keyword.ToLower());
     }
 
-    // category filter
+    //category filter
     public bool MatchesCategory(string category)
     {
         return Category == category;
