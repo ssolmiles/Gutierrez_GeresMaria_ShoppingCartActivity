@@ -7,7 +7,7 @@ class CartItem
 
     public double GetSubTotal()
     {
-        return Product.CalculateSubTotal(Quantity);
+        return Product.CalculateSubTotal(Quantity); 
     }
 }
 
@@ -76,7 +76,7 @@ class Program
         }
     }
 
-    // FIX #5 — Y/N validation helper 
+     
     static bool GetYesOrNo(string prompt)
     {
         while (true)
@@ -89,7 +89,7 @@ class Program
         }
     }
 
-    // FIX #6 — Compute how much of a product is already in the cart
+    
     static int GetCartQuantityForProduct(CartItem[] cart, int cartCount, int productId)
     {
         int total = 0;
@@ -101,7 +101,7 @@ class Program
 
     // ─── Cart Management Submenu ─────────────────────────
 
-    // FIX #1 — Dedicated cart submenu (remove, update, clear all missing before)
+   
     static void CartMenu(CartItem[] cart, ref int cartCount)
     {
         while (true)
@@ -127,7 +127,7 @@ class Program
                 int index = GetIntInRange("Enter item number to update: ", 1, cartCount) - 1;
                 CartItem item = cart[index];
 
-                // FIX #6 — Stock check must account for OTHER cart entries of the same product
+                
                 int otherCartQty = GetCartQuantityForProduct(cart, cartCount, item.Product.Id) - item.Quantity;
                 int availableStock = item.Product.RemainingStock - otherCartQty;
 
@@ -215,15 +215,12 @@ class Program
 
         ViewCart(cart, cartCount);
 
-        // FIX #5 — Y/N confirmation before checkout
+        
         if (!GetYesOrNo("Proceed to checkout? (Y/N): "))
         {
             Console.WriteLine("Checkout cancelled.");
             return;
         }
-
-        // FIX #6 — Validate stock for every cart item at checkout time
-        //          (catches cases where the same product was added twice)
         bool stockOk = true;
         for (int i = 0; i < cartCount; i++)
         {
@@ -252,7 +249,7 @@ class Program
         double discount = total >= 5000 ? total * 0.10 : 0;
         double finalTotal = total - discount;
 
-        // FIX #5 — Payment input re-prompts on invalid/insufficient (already present, kept & cleaned)
+        
         double payment;
         while (true)
         {
@@ -292,7 +289,7 @@ class Program
         Console.WriteLine($"  Change      : PHP {change}");
         Console.WriteLine("==================================");
 
-        // FIX #4 — Store both receipt number AND total (was only storing total before)
+        
         orderHistory[orderCount++] = new OrderRecord
         {
             ReceiptNumber = receiptNumber,
@@ -332,14 +329,17 @@ class Program
             new Product { Id = 3, Name = "Earpods",     Category = "Electronics", Price = 500,  RemainingStock = 10 },
             new Product { Id = 4, Name = "Speaker",     Category = "Electronics", Price = 1200, RemainingStock = 6  },
             new Product { Id = 5, Name = "Chino",       Category = "Clothing",    Price = 350,  RemainingStock = 12 },
-            new Product { Id = 6, Name = "Long Sleeve", Category = "Clothing",    Price = 500,  RemainingStock = 5  }
+            new Product { Id = 6, Name = "Long Sleeve", Category = "Clothing",    Price = 500,  RemainingStock = 5  },
+            new Product { Id = 7, Name = "HDMI",        Category = "Electronics", Price = 330, RemainingStock = 6  },
+            new Product { Id = 8, Name = "Tank Top",    Category = "Clothing",    Price = 150,  RemainingStock = 22 },
+            new Product { Id = 9, Name = "Sun Dress",   Category = "Clothing",    Price = 2500,  RemainingStock = 5  }
         };
 
-        //
+        
         CartItem[] cart = new CartItem[3];
         int cartCount = 0;
 
-        // FIX #4 — Order history now stores OrderRecord (receipt number + total)
+        
         OrderRecord[] orderHistory = new OrderRecord[20];
         int orderCount = 0;
 
@@ -352,7 +352,7 @@ class Program
             Console.WriteLine("2. Search Product");
             Console.WriteLine("3. Filter by Category");
             Console.WriteLine("4. Add to Cart");
-            Console.WriteLine("5. Cart Menu");        // FIX #1 — replaces bare "View Cart"
+            Console.WriteLine("5. Cart Menu");      
             Console.WriteLine("6. Checkout");
             Console.WriteLine("7. Order History");
             Console.WriteLine("8. Exit");
@@ -428,7 +428,7 @@ class Program
 
                 int qty = GetPositiveInt("Enter quantity: ");
 
-                // FIX #6 — Available stock = RemainingStock minus what's already in cart
+                
                 int alreadyInCart = GetCartQuantityForProduct(cart, cartCount, selected.Id);
                 int availableStock = selected.RemainingStock - alreadyInCart;
 
@@ -442,7 +442,7 @@ class Program
                     continue;
                 }
 
-                // FIX #3 — If product already exists in cart, update its quantity instead of duplicating
+                
                 bool merged = false;
                 for (int i = 0; i < cartCount; i++)
                 {
